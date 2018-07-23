@@ -11,11 +11,16 @@ export class ShoppingListService {
   ];
 
   getIngredients() {
-    return this.ingredients.slice();
+    return this.ingredients.slice(); // returning a COPY of the ingredients array
   }
 
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.ingredientsChanged.emit(this.ingredients.slice());
+    this.ingredientsChanged.emit(this.ingredients.slice()); // emitting a COPY of the ingredients array
+  }
+
+  addIngredients(ingredients: Ingredient[]) {
+    this.ingredients.push(...ingredients); // adding the array with ingredients but with spread operator
+    this.ingredientsChanged.emit(this.ingredients.slice()); // emitting a COPY of the ingredients array
   }
 }

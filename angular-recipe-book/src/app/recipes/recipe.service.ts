@@ -1,7 +1,9 @@
 import { Recipe } from './recipe.model';
-import { EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
+@Injectable()
 export class RecipeService {
 
   recipeSelected = new EventEmitter<Recipe>();
@@ -9,7 +11,7 @@ export class RecipeService {
   private recipes: Recipe[] = [
     new Recipe('Tasty Schnitzel',
     'A super tasty schnitzel - just awesome!',
-    'http://img.bestrecipes.com.au/RCK3slSo/h300-w400-cscale/br-api/asset/20771/super-easy-pizza-dough-recipe.jpg',
+    'https://thumbs.dreamstime.com/b/wiener-schnitzel-french-fries-breaded-steak-lemon-56757436.jpg',
     [
       new Ingredient('Meat', 1),
       new Ingredient('French Fries', 20)
@@ -17,7 +19,7 @@ export class RecipeService {
   ),
   new Recipe('A Big Fat Burger',
     'What else do we need to say?',
-    'http://img.bestrecipes.com.au/RCK3slSo/h300-w400-cscale/br-api/asset/20771/super-easy-pizza-dough-recipe.jpg',
+    'https://favim.com/orig/201108/04/big-mac-burger-diet-fat-food-Favim.com-119798.jpg',
     [
       new Ingredient('Buns', 2),
       new Ingredient('Meat', 2)
@@ -25,8 +27,13 @@ export class RecipeService {
   )
   ];
 
+  constructor(private shoppingListService: ShoppingListService) { }
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    this.shoppingListService.addIngredients(ingredients);
   }
 }
