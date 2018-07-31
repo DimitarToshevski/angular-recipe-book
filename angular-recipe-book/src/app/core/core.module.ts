@@ -12,6 +12,7 @@ import { AuthService } from '../auth/auth.service';
 import { AuthGuard } from '../auth/auth-guard.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../shared/auth.interceptor';
+// import {  ResponseAccessInterceptor } from '../shared/login.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AuthInterceptor } from '../shared/auth.interceptor';
       AuthService,
       AuthGuard,
       { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+      // { provide: HTTP_INTERCEPTORS, useClass: ResponseAccessInterceptor, multi: true } / test interceptor
     ],
 })
 export class CoreModule {
