@@ -14,18 +14,18 @@ export class DataStorageService {
                private authService: AuthService) { }
 
   storeRecipes() {
-    const token = this.authService.getToken();
     return this.http.put('https://angular-recipe-book-482dc.firebaseio.com/recipe-book.json',
-                   this.recipeService.getRecipes(), {
-                     params: new HttpParams().set('auth', token)
-                   });
+                   this.recipeService.getRecipes());
   }
 
   getRecipes() {
-   const token = this.authService.getToken();
-    this.http.get<Recipe[]>('https://angular-recipe-book-482dc.firebaseio.com/recipe-book.json', {
-      params: new HttpParams().set('auth', token)
-    })
+   // const token = this.authService.getToken();
+    this.http.get<Recipe[]>('https://angular-recipe-book-482dc.firebaseio.com/recipe-book.json')
+
+    // Added AuthInterceptor to add params instead of adding params to each request
+    // this.http.get<Recipe[]>('https://angular-recipe-book-482dc.firebaseio.com/recipe-book.json',
+    // { params: new HttpParams().set('auth', token) })
+
     .pipe(map(
         (recipes) => {
           for (const recipe of recipes) {

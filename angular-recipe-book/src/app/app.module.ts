@@ -22,7 +22,7 @@ import { ShoppingListModule } from './shopping-list/shopping-list.module';
     FormsModule,
     HttpClientModule,
     SharedModule,
-    ShoppingListModule,
+    ShoppingListModule
   ],
   bootstrap: [AppComponent]
 })
